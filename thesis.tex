@@ -1,0 +1,309 @@
+%
+% Vorlage Diplom-/Master-/Bachelorarbeit
+% Norman Heino
+% Version: 0.1
+% Datum: 2011-03-16
+% Encoding: UTF-8
+%
+\documentclass[% 
+  parskip=half,
+  ]{scrreprt} % 11pt is default
+
+\usepackage[automark, headsepline]{scrpage2}
+%\usepackage{Sweave}
+%\usepackage{showframe}
+\usepackage[justification=centering]{caption}
+\pagestyle{scrheadings}
+
+% Kolumnentitel in Serifenloser Schrift
+\renewcommand*{\headfont}{\normalfont\sffamily\slshape}
+
+% Alle Seiten sind rechte Seiten
+\refoot[\pagemark]{\pagemark}
+\rofoot[\pagemark]{\pagemark}
+\rehead[]{\headmark}
+\rohead[]{\headmark}
+\chead[]{}
+\cfoot[]{}
+
+% „--“ zwischen Kapitel und Kolumnentitel
+\renewcommand*{\chaptermarkformat}{%
+  \chapappifchapterprefix{\ }
+  \thechapter\autodot\enskip{--}\enskip%
+}
+
+% Use utf-8 encoding for foreign characters
+\usepackage[utf8]{inputenc}
+
+% Fonts
+% Roman
+\usepackage[sc]{mathpazo}
+% Sans
+\usepackage{avant}
+% \usepackage[scaled=.95]{helvet}
+
+% Monospaced
+\usepackage[scaled=.86]{beramono}
+% Mono aus den pxfonts
+% \renewcommand{\ttdefault}{pxtt}
+% \DeclareMathAlphabet{\mathtt}{OT1}{pxtt}{m}{n}
+% \SetMathAlphabet{\mathtt}{bold}{OT1}{pxtt}{b}{n}
+
+% Support for multiple languages
+\usepackage[english,ngerman]{babel}
+
+% Non-english bibliography
+\usepackage[fixlanguage]{babelbib}
+\selectbiblanguage{ngerman}
+
+% Nicer looking fonts
+\usepackage[T1]{fontenc}
+
+% Farben
+\usepackage{color}
+
+% Conditionals
+% See ftp://ftp.rrzn.uni-hannover.de/pub/mirror/tex-archive/macros/latex/contrib/xifthen/xifthen.pdf
+\usepackage{xifthen}
+
+% This is now the recommended way for checking for PDFLaTeX:
+\usepackage{ifpdf}
+
+% Document info vars
+\newcommand{\diplfirstname}{Marcus}
+\newcommand{\diplname}{Nitzschke}
+\newcommand{\dipltitle}{Patient-centered Drug Management based on Linked Open Data}
+\newcommand{\diplsubtitle}{(Arbeitstitel)}
+\newcommand{\diplsubject}{Master's Thesis}
+
+\definecolor{remcolor}{rgb}{.95,0.35,0.35}
+
+\newcommand{\rem}[1]{\textcolor{remcolor}{\emph{#1}}}
+
+% Hyperref
+\ifpdf
+%\usepackage[pdftex]{graphicx}
+\usepackage[
+  pdftex, 
+  pdfpagelabels,
+  colorlinks=false,
+  pdfborder={0 0 0},
+  pdftitle={\dipltitle: \diplsubtitle},
+  pdfauthor={\diplfirstname\ \diplname},
+  pdfsubject={\diplsubject},
+  pdfkeywords={}]{hyperref}
+\else
+\usepackage{graphicx}
+\fi
+
+\usepackage{graphicx}
+\usepackage{epstopdf}
+\usepackage{listings}
+\usepackage{color}
+\usepackage{url}
+\usepackage{booktabs}
+\usepackage{multirow}
+\usepackage{rotating}
+\usepackage{mathtools}
+
+% Abbreviations
+\newcommand{\linenumberstyle}{\scriptsize}
+\newcommand{\lla}{\ensuremath{\longleftarrow}}
+\newcommand{\todo}[1]{\marginline{\footnotesize TODO: #1}}
+\newcommand{\pdfscale}{1.0} % Global scaling factor for included PDF files
+\newcommand{\enlarge}{\enlargethispage{1.5em}}
+
+% Adapt LaTeX defaults
+\linespread{1.4}
+\setlength{\abovecaptionskip}{.5em}
+\setlength{\parindent}{1em}
+\setlength{\parskip}{.2em}
+
+% continous footnotes
+\usepackage{remreset}
+\makeatletter
+\@removefromreset{footnote}{chapter}
+\makeatother
+
+% Adapt KOMA defaults
+\setcapindent{\parindent}
+\setkomafont{captionlabel}{\sffamily\bfseries}
+
+
+% Listings setup
+% See http://ftp.fernuni-hagen.de/ftp-dir/pub/mirrors/www.ctan.org/macros/latex/contrib/listings/listings.pdf
+
+% define json listings
+\lstdefinelanguage{json} {
+  sensitive=false, 
+  morestring=[b]"', 
+  showstringspaces=false
+}
+
+% define turtle listings
+\lstdefinelanguage{turtle} {
+  sensitive=false, 
+  morestring=[b]"', 
+  showstringspaces=true
+}
+
+% define sparql listing
+\lstdefinelanguage{sparql} {
+  sensitive=false, 
+  morestring=[b]"', 
+  showstringspaces=true,
+  backgroundcolor=\color[gray]{1.0},
+  numbers=none,
+  xleftmargin=0pt,
+  xrightmargin=0pt,
+  framexleftmargin=0pt,
+  framexrightmargin=0pt
+}
+
+% set default listing style
+\lstset{
+  language=json, 
+  basicstyle=\small\ttfamily, 
+  captionpos=b, 
+  % keywordstyle=\color[rgb]{0,0,0.7}, 
+  % stringstyle = \color[rgb]{0,0.5,0}, 
+  % identifierstyle=\color{orange}, 
+  commentstyle=\color[gray]{0.5}, 
+  backgroundcolor=\color[gray]{0.96}, 
+  framexleftmargin=1pt,
+  xleftmargin=4.4pt,
+  xrightmargin=3.4pt,
+  numbers=left, 
+  numberstyle=\linenumberstyle, 
+  frame=single, 
+  aboveskip=1.3em
+}
+
+% Algorithms
+% See ftp://ftp.tu-chemnitz.de/pub/tex/macros/latex/contrib/algorithm2e/algorithm2e.pdf
+% \usepackage[german, algochapter, boxed, linesnumbered, vlined]{algorithm2e}
+% \SetAlCapSkip{.885em}
+% \SetNlSkip{1.5em}
+% \SetInd{.8em}{.8em}
+% \SetNlSty{linenumberstyle}{}{}
+% \newcommand{\captionlabel}{\usekomafont{captionlabel}}
+% \SetAlTitleFnt{captionlabel}
+
+% Document info
+\titlehead{
+  \begin{center}
+    \textsc{Universität Leipzig}\\
+    Faculty of Mathematics and Computer Science\\
+    Department of Computer Science
+  \end{center}
+}
+
+% Generates the title
+\title{%
+\dipltitle\\%
+\bigskip\usekomafont{subtitle}%
+\parbox[h]{0.8\textwidth}{\begin{center}\diplsubtitle\end{center}}%
+}
+
+% Subtitle is abused as type of work
+\subtitle{\usekomafont{subject}\vspace{3em}\diplsubject}
+\author{}
+\date{}
+\publishers{
+  \large\parbox{\textwidth}{%
+    % \vspace*{4\baselineskip}
+    Leipzig, March 2013\hfill 
+    Submitted by\\
+    \raggedleft
+    \diplname, \diplfirstname\\
+    Studiengang Informatik
+  }\\
+\raggedright
+\vspace{2.5cm}
+\textbf{Thesis Supervisors:\\
+  Prof. Dr. Klaus-Peter Fähnrich\\
+  Dipl. Inf. Romy Elze
+  %Department of Computer Science
+}
+}
+
+\begin{document}
+\selectlanguage{english}
+
+\ifpdf
+\DeclareGraphicsExtensions{.pdf, .png, .jpg, .tif}
+\else
+\DeclareGraphicsExtensions{.eps, .jpg}
+\fi
+
+% Seitennummerierung auf römisch
+\pagenumbering{roman}
+
+% Titelei
+\maketitle
+
+\input{abstract.tex}
+
+% Zusammenfassung
+%\thispagestyle{empty}
+
+
+\paragraph{Keywords} LinkedOpenData drug interaction Dispedia
+
+% Verzeichnisse
+\setcounter{tocdepth}{1}
+\tableofcontents
+
+% Ab nächster Seite
+\clearpage
+% Seitennummerierung auf arabisch
+\pagenumbering{arabic}
+
+% \begin{abstract}
+% \end{abstract}
+
+\input{introduction/introduction.tex}
+
+\input{preliminaries/preliminaries.tex}
+
+\input{methods/methods.tex}
+
+\input{evaluation/evaluation.tex}
+
+\input{summary/summary.tex}
+
+\input{discussion/discussion.tex}
+
+% Anhang
+\appendix
+
+% Quellcode
+%\chapter{Quellcode des Systems}
+%\rem{Quellcode-Link, zum Beispiel zum GitHub-Repo.}
+
+% Literalturverzeichnis
+\bibliography{bibliography}
+%\bibliographystyle{babplain-fl}
+\bibliographystyle{alpha}
+
+\listoffigures
+\listoftables
+%\lstlistoflistings
+%\listofalgorithms
+
+% Erklärung
+\clearpage
+\pagestyle{empty}
+\vspace*{1cm}
+\begin{center}
+\textbf{\sffamily Declaration}
+\end{center}
+\vspace*{0.5cm}
+This master's thesis is the result of my own work. Material from the published or unpublished work of others, which is referred to in the thesis, is credited to the author in the text. I understand that failure to do this amounts to plagiarism and will be considered grounds for failure in this thesis and the degree examination as a whole.
+% Ich versichere, dass ich die vorliegende Arbeit selbständig und nur unter Verwendung der angegebenen Quellen und Hilfsmittel angefertigt habe, insbesondere sind wörtliche oder sinngemäße Zitate als solche gekennzeichnet. Mir ist bekannt, dass Zu\-wider\-hand\-lung auch nachträglich zur Aberkennung des Abschlusses führen kann.
+
+\vspace{2cm}
+\noindent
+Leipzig, 14. March 2013\hfill Signature
+
+\end{document}
