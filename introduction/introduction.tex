@@ -2,45 +2,92 @@
 \label{cha:introduction-1}
 
 \section{Subject}
-\label{sec-1}
+\label{sec:subject}
 
-\begin{itemize}
-\item verschiedene anwendungen im  bereich arzneimittelmngtm
-\item überschneidende funktionalität
-\item 
-\item keine endanwendungen auf lodd basierend bekannt
-\end{itemize}
+The prescription and application of drugs in health care is one of the most important parts in the healing process of  a patient.
+If this process is not managed accurately consequences from financial losses to  human harms are possible.
+In Germany estimations state that annually 25.000 patients die because of medication errors \cite{pharzeit10} (status 2010).
+In consequence it is essential that -- as a base to avoid these problems -- all available knowledge about drugs and their characteristics is freely accessible and usable.
+This process of publishing medical -- drug related -- data has already started in the last years with projects like XXX or XXX.
+%That is important because so it is possible for everyone to build third-party applications on top of this data.
+Although it is possible to build third-party applications on top of this data, such applications are very rare at this time.
+In the case of LODD only small projects exist like XXX or Pharmer \cite{khalili2013pharmer}.
+
+Besides these third-party projects mainly clinical applications implement specific drug related functionalities.
+For example a \textit{Patient Information System} stores all the details about the prescibed drugs of a certain patient and may want to support the nurses by offering informations about the route of application or the maximum dosage.
+Another application, like a \textit{Computerized Physician Order Entry System} that selects and prescribes drugs, want to check interactions of the possible drugs.
+And for both of the applications the side effects of a certain drug may be of interest.
+These examples show that many different medical applications implement drug related functionalities.
+And many of them also share the same requirements because there is a set of common questions, like \textit{``What are the side effects of drug X?''}.
+But ignoring these shared requirements, many of the applications provide their own -- mostly proprietary -- knowledge bases.
+
+% \begin{itemize}
+% \item verschiedene anwendungen im  bereich arzneimittelmngtm
+% \item überschneidende funktionalität
+% \item 
+% \item keine endanwendungen auf lodd basierend bekannt
+% \end{itemize}
+
 \section{Problem}
-\label{sec-2}
+\label{sec:problem}
 
-\begin{itemize}
-\item unterschiedliche implementierungen
-\item unters. quellen
-\item ausgesagt werden soll aber das selbe
-\item 
-\item umfangreiches schemawissen nötig um anfragen an lod stellen zu können
-\end{itemize}
+In section \ref{sec:subject} the diversity of applications that implement drug related functionalities was mentioned.
+This goes along with the fact that multiple knowledge bases are used which actually should provide the same data. 
+This leads to several problems.
+
+The first problem -- insufficient integration -- follows from the the different scopes and the different expressivity of the knowledge bases.
+This means there are many knowledge bases for special domains like side effects or alternative medicine.
+But if one knowledge base wants to use the data of another special domain this is usually not possible.
+Therefore it has to express the data on their own and thats the starting point of the next problem: redundancy.
+Many drug related knowledge bases include a set of common facts that are essential for this domain.
+The third problem is the correctness of the knowledge.
+While the number of persons that validate the data of a proprietary knowledge source is limited, projects like Wikipedia has shown the power of an open review process in the last years.
+
+A common problem that third-party applications using these data sources have is the extensive schema knowledge that is required to use the data efficiently.
+% \begin{itemize}
+% \item unterschiedliche implementierungen
+% \item unters. quellen
+% \item ausgesagt werden soll aber das selbe
+% \item 
+% \item umfangreiches schemawissen nötig um anfragen an lod stellen zu können
+% \end{itemize}
+
 \section{Motivation}
-\label{sec-3}
+\label{sec:motivation}
 
-\begin{itemize}
-\item durch einheitliche schnittstelle soll datenqualität vereinheitlicht werden
-\item einstiegsbarriere für neue anwendunge senken (cpoe)
-\item 
-\item vereinfachen der möglichkeit wissen aus lodd zu nutzen
-\item (praxiseinsatz von lodd)
-\end{itemize}
+If the given problems of section \ref{sec:problem} could be solved this would lead to a better data quality in the first place.
+Data quality contains in this context the expressivity, completeness and correctness of the knowledge.
+
+Another consequence would be the reduced starting barrier for application developers.
+They don't have to know the whole schema of the knowledge base, they have just to know how to use the given interface.
+This would hopefully lead to many interesting applications on top of the given data.
+
+% \begin{itemize}
+% \item durch einheitliche schnittstelle soll datenqualität vereinheitlicht werden
+% \item einstiegsbarriere für neue anwendunge senken (cpoe)
+% \item 
+% \item vereinfachen der möglichkeit wissen aus lodd zu nutzen
+% \item (praxiseinsatz von lodd)
+% \end{itemize}
+
 \section{Objectives}
-\label{sec-4}
+\label{sec:objectives}
 
-\begin{itemize}
-\item bereitstellen einer API zur unterstützung des drug management life cycles basierend auf lod(d)
-\item evaluation anhand verschiedener anwendungsfälle
-\begin{itemize}
-\item dispedia
-\item eigenes portal zur arzneimittel-verwaltung
-\end{itemize}
-\end{itemize}
+Emerged from the motivation this thesis shall provide an web-based \textit{Application Programming Interface} (API).
+This API will support the process of answering drug related questions according to the WHO drug management life cycle.
+
+This thesis shall also provide two use cases where the usage of the API will be demonstrated and evaluated.
+The first use case is the integration in Dispedia -- an information system in the complex field of rare diseases \cite{elze2013dispedia}.
+The second use case is a personal drug management portal built around this API to support privat persons managing their prescribed drugs.
+
+% \begin{itemize}
+% \item bereit\-stellen einer API zur unter\-stützung des drug manage\-ment cycles basierend auf lod(d)
+% \item evaluation anhand verschiedener anwendungsfälle
+% \begin{itemize}
+% \item dispedia
+% \item eigenes portal zur arzneimittel-verwaltung
+% \end{itemize}
+% \end{itemize}
 
 %%% Local Variables: 
 %%% mode: latex
