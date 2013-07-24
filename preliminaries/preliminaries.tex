@@ -3,16 +3,157 @@
 
 \section{Drug Management}
 \label{sec:drug-management}
-\begin{itemize}
-\item abgrenzung zu klinischen drug management
-\item who life cycle
+
+To get a better understanding what the term Drug Management stands for it is essential to clearify the term Management at first.
+Management comprises the non-executing tasks of a certain domain... \todo{}
+The term Drug Management was adopted by the WHO in their publication about managing drugs at health centres \cite{who2004}.
+The term management is defined in their publication as follows: 
+\begin{quote}
+  Management is the act or art of being responsible or in charge and conducting or supervising something (e.g. a health centre pharmacy, business, public undertaking) with a degree of skill and address. It is the judicious use of means to accomplish an end (i.e. public health).
+\end{quote}
+With this definition in mind the question can be answered why it is useful to manage drugs.
+Refering to the WHO there are three main reasons:
+\begin{enumerate}
+\item ``Firstly, drugs are part of the link between the patient and health services.''\\
+  This is the most trivial reason that addresses the direct influence of drugs to the patients health state. If drugs are not managed properly the success of the treatment process is imperiled. 
+\item ``Secondly, poor drug management [...] is a critical issue, but major improvements are possible that can save money and improve access.''\\
+  Besides the medical benefits, a proper drug management can also result in financial advantages. These can be achived by an improved selection and procurement of the required drugs.
+\item ``Finally, drugs are no longer the responsibility of health workers only.''\\
+  blah \todo{}
+\end{enumerate}
+
+\begin{figure}
+  \centering
+  \includegraphics[scale=2]{preliminaries/life_cycle.jpg}
+  \caption{WHO drug management life cycle}
+  \label{fig:life_cycle}
+\end{figure}
+The WHO proposes a drug management life cycle which is the foundation to implement a proper drug management at a certain institution.
+This life cycle which is shown in figure \ref{fig:life_cycle} contains four phases which are described shortly in the following listing:
+\begin{itemize}\todo{}
+\item Selection
+\item Use
+\item Procurement
+\item Storage and Distribution
 \end{itemize}
+According to the WHO these phases ``are interlinked and are reinforced by appropriate management support systems (i.e. tools)''.
+The API which is developed by this thesis is settled up in this category of support systems.
+
+One point has to be remarked regarding the scope of the WHO recommendations.
+Althought the cited publication addresses health centres, recommendations like the life cycle are easily adoptable to other areas, e.g. private healthcare.
 
 \section{Semantic Web}
 \label{sec:semantic-web}
+The ongoing growth of digital data in the past years has revealed many shortcomings that occur with these amounts of data.
+Fields of research like \textit{Big Data} also show the importance of managing these amounts of data efficiently.
+One key issue since years is the distinction between syntactically and semantically processable data.
+Tim Berners-Lee proposed in 2001 a model to describe specific data statements in a better way.
+This approach was called \textit{Ressource Description Framework} (RDF) and is one important part of the Semantic Web Stack.
+This stack combines several technologies and standars that are necessary to transfer the syntactic web to a semantic web.
+The Semantic Web Stack is illustrated in figure \ref{fig:sem_stack}.
+\begin{figure}
+  \centering
+  \includegraphics[scale=0.3]{preliminaries/semweb_stack}
+  \caption{Semantic Web Stack}
+  \label{fig:sem_stack}
+\end{figure}
+The advantages of a semantic web are numerous.
+The main advantage is that the information are not only machine readable but machine processable.
+This entails other improvements like reasoning that transfers implicit knowledge into explicit.
+
+The following paragraphs will describe the most important technologies and standards of the Semantic Web Stack that are necessary for this thesis:
+
+At the lowest level of the stack there are the Uniform Resource Identifier (URI).
+A URI identifies a specific resource, e.g. a car.
+For several other domains there already exists such concepts as URIs.
+For example the Uniform Resource Locator (URL) identifies web sites or an International Standard Book Number (ISBN) identifies books.
+The URI itself is just a set of characters that can be additionally divided into five segments: scheme, authority, path, query and fragment.
+An example of such a URI would be: \texttt{http://example.com/Alice}.
+This URI would describe the resource ``Alice''.
+
+Based on the identification of resources, the already mentioned Resource Description Framework has the goal to describe these resources.
+Therefore RDF is one of the most important concepts of the Semantic Web Stack.
+The approach of RDF to model knowledge is to express statements as triples.
+This is tight to how natural language is mostly constructed.
+Obviously that is why the components of the triple use the well known names of \textit{Subject, Predicate} and \textit{Object}.
+Figure \ref{fig:sem_rdf} shows an example triple.
+The subject of such a triple has to be always an URI, same belongs to the predicate.
+An exception is the object which can be additionally a literal.
+A literal is a direct information typed in a specific way, e.g. as date or simply text, which refers to no other resource.
+For more advanced models it is possible to describe the subject and object in a anonymous way, without a concrete entity.
+These anonymous resources are called blank nodes, but will be without broader relevance for this thesis.
+At the end one important distinction has to be made about RDF.
+Often RDF is getting confused with RDF/XML -- a notation of RDF statements.
+While RDF itself only describes how to model information, several RDF notations exist that express these information in several ways.
+Examples for such notations besides the already mentioned RDF/XML is N-Triples, Turtle or JSON-LD.
+
+\begin{figure}
+  \centering
+  \includegraphics[width=\textwidth]{preliminaries/semweb_rdf1}
+  \caption{Example of a RDF triple}
+  \label{fig:sem_rdf}
+\end{figure}
+
+On top of RDF the Semantic Web Stack levels SPARQL, an RDF query language.
+SPARQL enables comprehensive queries over a knowledge base built on RDF.
+SPARQL itself uses many well known keywords from SQL, but because of the graph structure of RDF and therefore of the triple stores the languages naturally differ.
+
+Given the following two triples in Turtle notation:
+\begin{lstlisting}[numbers=none,label=turtle]
+@prefix ex: <http://example.com/>.
+ex:anna ex:name ``Anna''.
+ex:bob  ex:name ``Bob''. 
+\end{lstlisting}
+
+Then the following simple SPARQL query would return the result ``Bob''.
+\begin{lstlisting}[numbers=none,label=sparql]
+SELECT ?name
+WHERE {
+  ex:bob ex:name ?name.
+}
+\end{lstlisting}
+
+With SPARQL 1.1 so called \textit{Federated Queries} were introduced.
+These Federated Queries are Statements that are queried against multiple (federated) SPARQL endpoints.
+This is a key feature for an easy integration of several RDF graphs.
 
 \section{Linked Open Data}
 \label{sec:linked-open-data}
+As described in the previous section RDF statements spans a graph of triples.
+Thereby, each knowledge base spans their own graph.
+Examples for large knowledge bases are DBpedia\footnote{\url{http://dbpedia.org}}, LinkedGeoData\footnote{\url{http://linkedgeodata.org}} or Drugbank.
+\textit{Linked Data} in general now describes the situation that entities of one knowledge base link to entities of another knowledge base.
+For example an entity of DBpedia about a drug could link to the same entity in Drugbank for further information.
+If the mentioned knowledge bases are freely available and usable then this is called \textit{Linked Open Data}.
+
+Tim Berners-Lee proposed some rules that state whether a data source is Linked Open Data, or not.
+These rules are:
+\begin{enumerate}
+\item Use URIs to denote things.
+\item Use HTTP URIs so that these things can be referred to and looked up ("dereferenced") by people and user agents.
+\item Provide useful information about the thing when its URI is dereferenced, leveraging standards such as RDF, SPARQL.
+\item Include links to other related things (using their URIs) when publishing data on the Web.
+\end{enumerate}
+
+Further, Berners-Lee categorizes Linked Open Data on the basis of a five star rating.
+Therefore the more a knowledge base follows these principals the more stars it earns.
+\begin{itemize}
+\item \textbf{1 star} - Available on the web (whatever format) but with an open licence, to be Open Data
+\item \textbf{2 stars} - Available as machine-readable structured data (e.g. excel instead of image scan of a table)
+\item \textbf{3 stars} - as (2) plus non-proprietary format (e.g. CSV instead of excel)
+\item \textbf{4 stars} - All the above plus, Use open standards from W3C (RDF and SPARQL) to identify things, so that people can point at your stuff
+\item \textbf{5 stars} - All the above, plus: Link your data to other people’s data to provide context
+\end{itemize}
+
+In conjunction with SPARQL this leads to large federated collections of knowledge that are comprehensively queryable.
+Figure \ref{fig:lod_cloud} gives an overview over the Linked Open Data cloud in 2011.
+But this kind of figure will end soon because of the rapidly evolving number of data sets.
+\begin{figure}
+  \centering
+  \includegraphics[width=\textwidth]{preliminaries/lod-cloud}
+  \caption{Linking Open Data cloud diagram, by Richard Cyganiak and Anja Jentzsch. http://lod-cloud.net/}
+  \label{fig:lod_cloud}
+\end{figure}
 
 %%% Local Variables: 
 %%% mode: latex

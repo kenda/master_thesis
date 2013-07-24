@@ -7,19 +7,34 @@
 The prescription and application of drugs in health care is one of the most important parts in the healing process of  a patient.
 If this process is not managed accurately consequences from financial losses to  human harms are possible.
 In Germany estimations state that annually 25.000 patients die because of medication errors \cite{pharzeit10} (status 2010).
-In consequence it is essential that -- as a base to avoid these problems -- all available knowledge about drugs and their characteristics is freely accessible and usable.
-This process of publishing medical -- drug related -- data has already started in the last years with projects like XXX or XXX.
+Managing drugs means to support the different phases drugs passes during the healing process.
+The \textit{World Health Organization} (WHO) published a Drug Management Cycle which defines four different phases \cite{who2004}.
+Details about this Drug Management Cycle are given in section \ref{sec:drug-management}. 
+An important base to implement a proper drug management and therefore to avoid the problem of medication errors is that all available knowledge about drugs and their characteristics is freely accessible and usable.
+This process of publishing medical -- drug related -- data has already started in the last years with projects like \textit{Linking Open Drug Data} (LODD) \cite{jentzsch2009linking} or BioPortal \cite{whetzel2011bioportal}.
+LODD is a project that links the knowledge of several vocabularies by recognizing common entities and freely provides this linked data.
+More details about this approach are given in section \ref{sec:linked-open-data}.
+BioPortal offers a platform where people or projects serve their biomedical ontologies and knowledge bases.
+These knowledge bases can in turn be mapped so that the same entities in different vocabularies are identified.
 %That is important because so it is possible for everyone to build third-party applications on top of this data.
 Although it is possible to build third-party applications on top of this data, such applications are very rare at this time.
-In the case of LODD only small projects exist like XXX or Pharmer \cite{khalili2013pharmer}.
+In the case of LODD only small projects exist like DiseaseCard \cite{oliveira2004diseasecard} or Pharmer \cite{khalili2013pharmer}.
 
 Besides these third-party projects mainly clinical applications implement specific drug related functionalities.
-For example a \textit{Patient Information System} stores all the details about the prescibed drugs of a certain patient and may want to support the nurses by offering informations about the route of application or the maximum dosage.
-Another application, like a \textit{Computerized Physician Order Entry System} that selects and prescribes drugs, want to check interactions of the possible drugs.
+For example a \textit{Patient Information System} stores all the details about the prescribed drugs of a certain patient.
+Therefore a nurse could be supported in the process of drug application by offering information about the route of application or the maximum dosage.
+Another application, like a \textit{Computerized Physician Order Entry System} that selects and prescribes drugs, could check interactions of the possible drugs.
 And for both of the applications the side effects of a certain drug may be of interest.
 These examples show that many different medical applications implement drug related functionalities.
 And many of them also share the same requirements because there is a set of common questions, like \textit{``What are the side effects of drug X?''}.
 But ignoring these shared requirements, many of the applications provide their own -- mostly proprietary -- knowledge bases.
+
+A comparable situation on the data level of another domain was recently solved.
+The Wikidata project ``centralizes access to and management of structured data'' \footnote{\url{https://www.wikidata.org/wiki/Wikidata:Main_Page}}.
+It solves the problem that many different Wikipedia provided common data about the same entities, e.g. the population of countries.
+Now Wikidata centrally provide this data through a common interface and the different Wikipedia refer to this source.
+In consequence there exist only one place where the data has to be updated and maintained.
+
 
 % \begin{itemize}
 % \item verschiedene anwendungen im  bereich arzneimittelmngtm
@@ -35,15 +50,27 @@ In section \ref{sec:subject} the diversity of applications that implement drug r
 This goes along with the fact that multiple knowledge bases are used which actually should provide the same data. 
 This leads to several problems.
 
-The first problem -- insufficient integration -- follows from the the different scopes and the different expressivity of the knowledge bases.
+The first problem -- insufficient integration -- follows from the different scopes and the different expressivity of the knowledge bases.
 This means there are many knowledge bases for special domains like side effects or alternative medicine.
-But if one knowledge base wants to use the data of another special domain this is usually not possible.
-Therefore it has to express the data on their own and thats the starting point of the next problem: redundancy.
-Many drug related knowledge bases include a set of common facts that are essential for this domain.
-The third problem is the correctness of the knowledge.
-While the number of persons that validate the data of a proprietary knowledge source is limited, projects like Wikipedia has shown the power of an open review process in the last years.
+But if one knowledge base wants to use the data of another special domain this is usually not possible, for instance because of an insufficient semantic integration.
+This means that term $x$ in knowledge base $X$ does not implicitely refer to the same object as term $x$ in knowledge base $Y$.
+Therefore the knowledge bases have to provide the data on their own.
 
-A common problem that third-party applications using these data sources have is the extensive schema knowledge that is required to use the data efficiently.
+This is the starting point of the next problem: redundancy.
+Many drug related knowledge bases include a set of common facts that are essential for this domain, like the code of the \textit{Anatomical Therapeutic Chemical Classification System} (ATC).
+So this is a common \textit{``Don't repeat yourself''} problem.
+A side effect of this problem is the higher error rate that a given statement of a knowledge base is wrong.
+
+So the third problem is the correctness of the knowledge.
+Proprietary knowledge bases generally have to deal with a strong limited number of people validating the data.
+In contrast open projects like Wikipedia are considered as ``self-healing'' information systems because of the high number of volunteers that report and correct data errors.
+To transfer this phenomenon to medical data it is unimaginable that everyone could edit such important information, but reporting errors would be a strong impact nonetheless.
+%While the number of persons that validate the data of a proprietary knowledge source is limited, projects like Wikipedia has shown the power of an open review process in the last years.
+
+Section \ref{sec:subject} presented two third-party applications using open data as their knowledge sources.
+A common problem using these data sources is the extensive schema knowledge that is required to use the data efficiently. 
+Besides the information about the usage of the given interface the developers are often forced to understand the structure of the data to perform their respective queries.
+This can be a deal-breaker for developers and therefore for innovative applications.
 % \begin{itemize}
 % \item unterschiedliche implementierungen
 % \item unters. quellen
@@ -57,10 +84,13 @@ A common problem that third-party applications using these data sources have is 
 
 If the given problems of section \ref{sec:problem} could be solved this would lead to a better data quality in the first place.
 Data quality contains in this context the expressivity, completeness and correctness of the knowledge.
+Medical applications would benefit from this improvement by getting a proper knowledge foundation.
+Following from that this would lead to unified, more well-grounded decisions for drug related questions.
+This would hopefully avoid some of the prescription errors that are made during the healing process of a patient.
 
-Another consequence would be the reduced starting barrier for application developers.
-They don't have to know the whole schema of the knowledge base, they have just to know how to use the given interface.
-This would hopefully lead to many interesting applications on top of the given data.
+Solving the problem that developers often have to know the schema of a certain knowledge base the consequence would be a reduced starting barrier for application developers.
+Instead of knowing about the whole schema of a knowledge base, only the knowledge about using the given interface would be required.
+Probably this would lead to many interesting applications on top of the given data.
 
 % \begin{itemize}
 % \item durch einheitliche schnittstelle soll datenqualität vereinheitlicht werden
@@ -73,12 +103,19 @@ This would hopefully lead to many interesting applications on top of the given d
 \section{Objectives}
 \label{sec:objectives}
 
-Emerged from the motivation this thesis shall provide an web-based \textit{Application Programming Interface} (API).
+Emerged from the motivation, this thesis shall proof that Linked Open Data is an appropriate knowledge source for drug management tools.
+For this purpose a web-based \textit{Application Programming Interface} (API) will be provided.
 This API will support the process of answering drug related questions according to the WHO drug management life cycle.
+This is achived by offering several API endpoints -- e.g. for drug-drug interactions -- that gather information from several semantic knowledge bases and return the merged results.
+One design goal is the simplicity of the API to reduce the starting barrier of developing new applications based on the given interface.
+More details about the implementation process are described in chapter \ref{cha:methods}.
 
 This thesis shall also provide two use cases where the usage of the API will be demonstrated and evaluated.
 The first use case is the integration in Dispedia -- an information system in the complex field of rare diseases \cite{elze2013dispedia}.
+The main purpose here is the integration of the drug-drug interaction endpoint.
 The second use case is a personal drug management portal built around this API to support privat persons managing their prescribed drugs.
+This use case shall demonstrate the other available endpoints of the provided interface.
+Chapter \ref{cha:evaluation} will offer more information about this evaluation process.
 
 % \begin{itemize}
 % \item bereit\-stellen einer API zur unter\-stützung des drug manage\-ment cycles basierend auf lod(d)
