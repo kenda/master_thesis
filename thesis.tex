@@ -35,6 +35,7 @@
 % Use utf-8 encoding for foreign characters
 \usepackage[utf8]{inputenc}
 
+\usepackage{longtable}
 % Fonts
 % Roman
 \usepackage[sc]{mathpazo}
@@ -73,7 +74,7 @@
 \newcommand{\diplfirstname}{Marcus}
 \newcommand{\diplname}{Nitzschke}
 \newcommand{\dipltitle}{Patient-centered Drug Management based on Linked Open Data}
-\newcommand{\diplsubtitle}{(Arbeitstitel)}
+\newcommand{\diplsubtitle}{}
 \newcommand{\diplsubject}{Master's Thesis}
 
 \definecolor{remcolor}{rgb}{.95,0.35,0.35}
@@ -211,7 +212,7 @@
 \publishers{
   \large\parbox{\textwidth}{%
     % \vspace*{4\baselineskip}
-    Leipzig, March 2013\hfill 
+    Leipzig, September 2013\hfill 
     Submitted by\\
     \raggedleft
     \diplname, \diplfirstname\\
@@ -236,18 +237,20 @@
 \fi
 
 % Seitennummerierung auf römisch
-\pagenumbering{roman}
+\pagenumbering{Roman}
 
 % Titelei
 \maketitle
 
-\input{abstract.tex}
+\input{abstract.tex}%\todo{}
 
 % Zusammenfassung
 %\thispagestyle{empty}
 
 
 \paragraph{Keywords} Semantic Web, Linked Open Data, Drug Management
+
+%\paragraph{Acknowledgement} lajsdfl adlöfj alsdf jladjf ölasdfjlöajsdfölajdf öl dfl asöldf alsdkjfla dflaj sdlföjaösdlfj öl sdfölasd f\todo{}
 
 % Verzeichnisse
 \setcounter{tocdepth}{1}
@@ -269,9 +272,9 @@
 
 \input{evaluation/evaluation.tex}
 
-\input{summary/summary.tex}
-
 \input{discussion/discussion.tex}
+
+\input{summary/summary.tex}
 
 % Anhang
 \appendix

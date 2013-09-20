@@ -2,12 +2,100 @@
 \chapter{Discussion}
 \label{cha:discussion}
 
-\begin{itemize}
-\item OpenPHACTS - ähnlicher ansatz für drug discovery
-\item Anforderungen für deutschen Arzneimittelkatalog?
-\item sedri: todos wie caching, umstieg auf fedx u.ä.
-\item state of the art bei rest/sparql converter oä?
-\end{itemize}
+\section*{Data level improvements}
+\label{sec:impr-data-level}
+
+As chapter \ref{cha:methods} showed, SEDRI queries several knowledge bases that mainly provide drug specific data.
+Althought much information is given by the semantics of RDF there are also some syntactic information inside the knowledge bases.
+For example the Drugbank knowledge base provides for each drug-drug interaction a label with the appropriate message what the interaction may cause.
+A big problem with such information is the fact that it is mostly only available in English.
+This limits the use of these labels in many systems.
+A workaround for this problem may be Natural Language Processing (NLP) like Named Entity Recognition which would detect important entities.
+These entities may exist in other languages in other knowledge bases like DBpedia.
+But in many cases this approach would lead to information loss.
+
+This is a general problem that many knowledge of the Linked Open Data cloud only provides English data.
+In terms of language as well as the information itself.
+This has two main reasons:
+First, because the Linked Data domain is still mainly a research topic most of the researchers build English applications to reach a broader community.
+The second reason is the patent policy of many countries regarding the pharmacology.
+For example in Germany only a fraction of pharmaceutic information is available compared to the USA.
+To get all available information about a drug you have to pay a license fee.
+But this doesn't enable one to use these information freely.
+So a further use, e.g. the transformation to RDF is hard to implement.
+%And the few public information that are available doesn't exist as RDF yet.
+Therefore -- especially on the national level -- it still has to be done much work to get comparable knowledge bases as the US.
+
+As always, there are many other improvements on the data level imaginable.
+In case of the  granularity of information in the knowledge bases an concrete example are the drug-drug interactions of Drugbank.
+Currently there is no severity of the interactions.
+This means an interaction that occurs in 1 of 1,000 cases has to be processed in the same way as an interaction that occurs in 1 of 10,000 cases.
+This directly leads to an information overload that in turn could lead to ignorance by the physician or any other involved party.
+
+\section*{Application level improvements}
+\label{sec:impr-appl-level}
+
+Besides these improvements on the data level also the application level -- which concretely means SEDRI -- could be improved further in the future.
+Independently from the evolution of more specific drug related questions that will be implemented other improvements are imaginable.
+One of those is a switch from the self implemented federated query processing to a tool like FedX, that was already introduced in section \ref{sec:data-integration}.
+This would especially lead to an easier maintenance of the code base.
+Whether such a change would also lead to a performance improvement has to be evaluated.
+
+Another improvement that is coupled to the virtual integration approach would be a caching mechanism.
+This would compensate the disadvantage that queries are not processable in case of an unreachable knowledge base.
+
+A third advancement of SEDRI could be the integration or implementation of a more generic SPARQL/ReST converter.
+This could mean it would be possible to formulate arbitrary SPARQL queries which would be automatically converted to a web interface endpoint for an easier processing.
+The closest approach for such a requirement is the \textit{Linked Data API}\footnote{\url{http://code.google.com/p/linked-data-api/} (last access Sept 19, 2013)}.
+The Linked Data API is a specification for a configuration vocabulary that defines several API endpoints for a triple store or as a proxy in front of a SPARQL endpoint.
+With Elda\footnote{\url{http://code.google.com/p/elda/} (last access Sept 19, 2013)} and Puelia\footnote{\url{http://code.google.com/p/puelia-php/} (last access Sept 19, 2013)} exist two implementations for this specification.
+% has some concrete implementations like Elda or Puelia.
+The former one is the implementation for a Java environment, the latter one for PHP.
+
+Other projects like \textit{Restpark}\footnote{\url{http://lmatteis.github.io/restpark/} (last access Sept 19, 2013)} which aimed to be a ``minimal RESTful API for RDF triples'' are either not in a stable version or not being developed any further.
+
+A last possible improvement would be a mechanism for instance matching.
+This means that if you query two knowledge bases, e.g. for drug-drug interactions and each of the knowledge bases contains information about the same interaction then these two instances would be recognized as identic.
+But currently there exist no perfect solution for this problem, because most of the matching technologies regarding ontologies are focused on the schema level \cite{castano2008ontology}.
+
+Additional improvements are also imaginable for the two evaluation projects Dispedia and DrugMan and the integration of SEDRI.
+One possible advancement regarding Dispedia would be the integration of more endpoints that are provided by SEDRI, e.g. the side effects or drug proposal endpoints.
+The former one could support the physician by chosing the right drugs when creating new proposals or the patient by deciding whether he wants to accept or decline a proposal.
+%The latter one could be implemented in the selection process of drugs when a physician creates or modifies a proposal.
+
+\section*{Drug Management improvements}
+\label{sec:drug-manag-impr}
+
+Other improvements regarding drug management in general are possible especially in the process of determining the drug name.
+Currently Dispedia as well as DrugMan use a simple text input with a given autocompletion helper.
+Nonetheless this approach requires much background knowledge which may be given for a physician but not for a patient who wants to manage his drugs.
+A possible solution could be the detection of the drug by a given barcode.
+Several European countries like France or Germany are already testing or even using such an approach by labeling their drug products with a GS1 DataMatrix code\footnote{\url{http://www.gs1.org/barcodes/technical/bar_code_types\#data_matrix} (last access Sept 18, 2013)}.
+This code contains an unique identifier for the drug like the ``Pharmazentralnummer'' in Germany.
+In the consequence by dereferencing such an identifier in a given knowledge base all needed information about the drug could be fetched automatically.
+Besides the unique identifier in most cases the codes contain more additional data like the expiration date.
+Especially in patient-centered applications like DrugMan this approach could lead to a huge benefit for the users -- in case of the required effort to determine all drugs as well as the final outcome.
+
+Another drug management advancement for DrugMan would be the implementation of import and export features.
+There are several possibilities for import and export formats.
+A general solution would be the support of HL7 CDA \cite{dolin2001hl7}.
+But there are many other country specific solutions, like the German recommendation ``ABDA Medikationsplan'' \cite{abdamedplan}.
+This approach encodes a full medication plan of a patiant as 2D code which can be easily decoded by other interfaces.
+The main difference between this solution and HL7 CDA is the transport medium of the data.
+While HL7 CDA is mainly developed for the electronical exchange of the documents the German approach uses the patiant for the exchange.
+In the latter case the patient ships his medication plan to the physician or pharmacist who decodes the barcode and in case of the prescription of new drugs encodes and prints the new medication plan for the patient.
+
+%\begin{itemize}
+%\item nur englische quellen, keine dt./europäischen
+%\item OpenPHACTS - ähnlicher ansatz für drug discovery
+%\item Anforderungen für deutschen Arzneimittelkatalog?
+%\item sedri: todos wie caching, umstieg auf fedx u.ä.
+%\item state of the art bei rest/sparql converter oä?
+%\item dispedia: Anforderungen für gute patientensicht (erfassung über barcode etc)?
+%\item dispedia: weitere integration wie nebenwirkungen oä
+%\item drugman: im/export
+%\item drugmanagement allg. was nötig?
+%\end{itemize}
 
 %%% Local Variables: 
 %%% mode: latex

@@ -1,4 +1,47 @@
-
 \chapter{Summary}
 \label{cha:summary}
 
+This thesis presented an approach for answering several drug related questions based on Linked Open Data knowledge bases.
+Section \ref{sec:objectives} stated the objective to provide an easy to use interface.
+This objective could be achived what is proofed by the evaluation projects.
+Therefore the developers or later the respective users have nothing else to know than the appropriate drug names or drug codes.
+All the required knowledge about the structure of the different knowledge bases is abstracted by SEDRI.
+How easy the usage of SEDRI is showed the two evaluation projects.
+They both showed also that SEDRI is usable independently of the programming language or other implementation details of the projects.
+This is due to the integration and component characteristics of a web-based HTTP interface.
+Thereby the two main objectives of section \ref{sec:objectives} are achieved.
+
+The problems that were worked out in section \ref{sec:problem} could be avoided mostly by the infrastructure of SEDRI.
+The first problem was insuffient integration which is mostly fixed by the Linked Data approach.
+Having that said the integration could be further improved by implementing Entity Matching mechanisms or the like.
+By using Linked Data as a knowledge foundation also the second problem -- redundancy -- is mostly fixed.
+This is due to the several domain specific knowledge bases where only a small part of the data is redundant.
+The last problem of possibly incorrect data is rather not applicable to Linked Open Data.
+The reason is that most of the biomedical knowledge bases are converted from already existing data bases, eg. Drugbank.
+Therefore the correctness of the knowledge depends on the original data sets.
+
+On the downside especially the evaluation by Dispedia showed some points that are missing to reach a state where the information provided by SEDRI are ready for the everyday professional use.
+Belonging to these points is the fact that most of the information in the knowledge bases are only available in English.
+Another point is the granularity of the provided data, for example the missing severity of drug-drug interactions as carved out in section \ref{sec:impr-data-level}.
+By regarding the additional downtimes of some knowledge bases every now and then -- which might be fixed at application level -- the question whether Linked Open Data is an appropriate knowledge foundation for drug management has currently rather to be answered negatively. 
+But it has to be mentioned that this applies to the professional use with the current state of the data.
+Private persons might already have a benefit by getting the information that their medication contains drug-drug interactions independently of any severity.
+Also the language problem mentioned aboved does not apply for completely English applications.
+Therefore in this case the current state of the data might be sufficient.
+
+These points and the other outlined possible improvements of chapter \ref{cha:discussion} show that the domain of drug management in combination with semantic data contains enough potential for further work and theses in the next years.
+
+%  \begin{itemize}
+% % \item professioneller einsatz fraglich
+% % \item lod evtl noch nicht geeignet
+% % \item genug potential für weiterentwicklung
+%  \item auf weitere probleme aus einleitung eingehen ob gelößt oder nicht\todo{}
+%  \item insufficient integration
+%  \item redundancy
+%  \item correctness of knowledge
+%  \end{itemize}
+
+%%% Local Variables: 
+%%% mode: latex
+%%% TeX-master: "../thesis"
+%%% End: 

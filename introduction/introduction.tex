@@ -6,31 +6,37 @@
 
 The prescription and application of drugs in health care is one of the most important parts in the healing process of  a patient.
 If this process is not managed accurately consequences from financial losses to  human harms are possible.
-In Germany estimations state that annually 25.000 patients die because of medication errors \cite{pharzeit10} (status 2010).
+In Germany estimations state that annually 25,000 patients die because of medication errors \cite{pharzeit10} (status 2010).
 Managing drugs means to support the different phases drugs passes during the healing process.
 The \textit{World Health Organization} (WHO) published a Drug Management Cycle which defines four different phases \cite{who2004}.
 Details about this Drug Management Cycle are given in section \ref{sec:drug-management}. 
 An important base to implement a proper drug management and therefore to avoid the problem of medication errors is that all available knowledge about drugs and their characteristics is freely accessible and usable.
-This process of publishing medical -- drug related -- data has already started in the last years with projects like \textit{Linking Open Drug Data} (LODD) \cite{jentzsch2009linking} or BioPortal \cite{whetzel2011bioportal}.
-LODD is a project that links the knowledge of several vocabularies by recognizing common entities and freely provides this linked data.
+Especially in the biomedical domain the role of ontologies for structuring such knowledge is still growing since decades.
+And in the last years a trend towards open access policies that on the one hand make the respective knowledge available freely and on the other hand allows the further use of these ontologies and the provided data is noticable.
+Newer examples for such projects that either provide these ontologies or use the free access for other use cases is the \textit{Linking Open Drug Data} (LODD) \cite{jentzsch2009linking} or BioPortal \cite{whetzel2011bioportal} project.
+%This process of publishing medical -- drug related -- data has already started in the last years with projects like \textit{Linking Open Drug Data} (LODD) \cite{jentzsch2009linking} or BioPortal \cite{whetzel2011bioportal}.
+LODD is a project that links the knowledge of several vocabularies by recognizing common entities.
+The additional gained knowledge in form of so called ``linked data'' is again provided freely under an open access policy.
 More details about this approach are given in section \ref{sec:linked-open-data}.
-BioPortal offers a platform where people or projects serve their biomedical ontologies and knowledge bases.
+The second project -- BioPortal -- offers a platform where people or projects serve their biomedical ontologies and knowledge bases.
 These knowledge bases can in turn be mapped so that the same entities in different vocabularies are identified.
 %That is important because so it is possible for everyone to build third-party applications on top of this data.
 Although it is possible to build third-party applications on top of this data, such applications are very rare at this time.
 In the case of LODD only small projects exist like DiseaseCard \cite{oliveira2004diseasecard} or Pharmer \cite{khalili2013pharmer}.
+The former one is graph-based browser that visualizes associated entities of other knowledge bases regarding a certain disease.
+The latter one -- Pharmer -- is a proof of concept for the authoring of semantic prescriptions.
 
 Besides these third-party projects mainly clinical applications implement specific drug related functionalities.
 For example a \textit{Patient Information System} stores all the details about the prescribed drugs of a certain patient.
 Therefore a nurse could be supported in the process of drug application by offering information about the route of application or the maximum dosage.
-Another application, like a \textit{Computerized Physician Order Entry System} that selects and prescribes drugs, could check interactions of the possible drugs.
+Another application, like a \textit{Computerized Physician Order Entry System} that selects and prescribes drugs, could check for interactions of the drugs that are going to be prescribed.
 And for both of the applications the side effects of a certain drug may be of interest.
 These examples show that many different medical applications implement drug related functionalities.
-And many of them also share the same requirements because there is a set of common questions, like \textit{``What are the side effects of drug X?''}.
+And many of them also share the same requirements regarding the used data sources because there is a set of common questions, like \textit{``What are the side effects of drug X?''}.
 But ignoring these shared requirements, many of the applications provide their own -- mostly proprietary -- knowledge bases.
 
 A comparable situation on the data level of another domain was recently solved.
-The Wikidata project ``centralizes access to and management of structured data'' \footnote{\url{https://www.wikidata.org/wiki/Wikidata:Main_Page}}.
+The Wikidata project ``centralizes access to and management of structured data'' \footnote{\url{https://www.wikidata.org/wiki/Wikidata:Main_Page} (last access Sept 18, 2013)}.
 It solves the problem that many different Wikipedia provided common data about the same entities, e.g. the population of countries.
 Now Wikidata centrally provide this data through a common interface and the different Wikipedia refer to this source.
 In consequence there exist only one place where the data has to be updated and maintained.
@@ -59,7 +65,7 @@ Therefore the knowledge bases have to provide the data on their own.
 This is the starting point of the next problem: redundancy.
 Many drug related knowledge bases include a set of common facts that are essential for this domain, like the code of the \textit{Anatomical Therapeutic Chemical Classification System} (ATC).
 So this is a common \textit{``Don't repeat yourself''} problem.
-A side effect of this problem is the higher error rate that a given statement of a knowledge base is wrong.
+A side effect of this problem is the higher chance that a given statement of a knowledge base is wrong or not up-to-date anymore.
 
 So the third problem is the correctness of the knowledge.
 Proprietary knowledge bases generally have to deal with a strong limited number of people validating the data.
@@ -86,11 +92,12 @@ If the given problems of section \ref{sec:problem} could be solved this would le
 Data quality contains in this context the expressivity, completeness and correctness of the knowledge.
 Medical applications would benefit from this improvement by getting a proper knowledge foundation.
 Following from that this would lead to unified, more well-grounded decisions for drug related questions.
-This would hopefully avoid some of the prescription errors that are made during the healing process of a patient.
+By supporting physicians, nurses, pharmacists and even the patient itself this would hopefully avoid some of the prescription errors that are made during the healing process of a patient.
 
 Solving the problem that developers often have to know the schema of a certain knowledge base the consequence would be a reduced starting barrier for application developers.
 Instead of knowing about the whole schema of a knowledge base, only the knowledge about using the given interface would be required.
 Probably this would lead to many interesting applications on top of the given data.
+And by a growing number of applications using these data sources more and more feedback would be flow back to improve the knowledge bases in turn.
 
 % \begin{itemize}
 % \item durch einheitliche schnittstelle soll datenqualität vereinheitlicht werden

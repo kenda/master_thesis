@@ -5,7 +5,8 @@
 \label{sec:drug-management}
 
 To get a better understanding what the term Drug Management stands for it is essential to clearify the term Management at first.
-Management comprises the non-executing tasks of a certain domain... \todo{}
+In general management comprises the non-executing tasks of a certain domain to accomplish certain goals.
+These non-executing tasks are divided in the four stages: \textit{planning}, \textit{organizing}, \textit{leading} and \textit{controlling} \cite{robbins2007fundamentals}.
 The term Drug Management was adopted by the WHO in their publication about managing drugs at health centres \cite{who2004}.
 The term management is defined in their publication as follows: 
 \begin{quote}
@@ -24,7 +25,7 @@ Refering to the WHO there are three main reasons:
 \end{enumerate}
 \begin{figure}
   \centering
-  \includegraphics[scale=2]{preliminaries/life_cycle.jpg}
+  \includegraphics[width=\textwidth]{preliminaries/life_cycle.eps}
   \caption{WHO drug management life cycle}
   \label{fig:life_cycle}
 \end{figure}
@@ -42,7 +43,7 @@ This life cycle which is shown in figure \ref{fig:life_cycle} contains four phas
   Many adverse drug events occur because of incorrect delivered drugs.
   Examples are too high dosages or incorrect routes of administration.
   The goal of the third phase therefore is to provide the right information about the usage of a drug at the right place to the right time.
-\item Storage and Distribution\\
+\item Storage and distribution\\
   The fourth phase manages how drugs are stored.
   This is important to prevent disfigurations of labels and to ``maintain integrity of packaging and so guarantee quality and potency of drugs during shelf life''.
   Further the patient needs help in cases of losing the drug packaging or similar cases.
@@ -58,8 +59,8 @@ Althought the cited publication addresses health centres, recommendations like t
 The ongoing growth of digital data in the past years has revealed many shortcomings that occur with these amounts of data.
 Fields of research like \textit{Big Data} also show the importance of managing these amounts of data efficiently.
 One key issue since years is the distinction between syntactically and semantically processable data.
-Tim Berners-Lee proposed in 2001 a model to describe specific data statements in a better way.
-This approach was called \textit{Ressource Description Framework} (RDF) and is one important part of the Semantic Web Stack.
+Tim Berners-Lee proposed in 2001 a concept to describe specific data statements in a better way \cite{berners2001semantic}.
+This model behind this approach was called \textit{Ressource Description Framework} (RDF) \cite{klyne2004resource} and is one important part of the Semantic Web Stack.
 This stack combines several technologies and standars that are necessary to transfer the syntactic web to a semantic web.
 The Semantic Web Stack is illustrated in figure \ref{fig:sem_stack}.
 \begin{figure}
@@ -74,7 +75,7 @@ This entails other improvements like reasoning that transfers implicit knowledge
 
 The following paragraphs will describe the most important technologies and standards of the Semantic Web Stack that are necessary for this thesis:
 
-At the lowest level of the stack there are the Uniform Resource Identifier (URI).
+At the lowest level of the stack there is the concept of the Uniform Resource Identifier (URI).
 A URI identifies a specific resource, e.g. a car.
 For several other domains there already exists such concepts as URIs.
 For example the Uniform Resource Locator (URL) identifies web sites or an International Standard Book Number (ISBN) identifies books.
@@ -94,9 +95,9 @@ A literal is a direct information typed in a specific way, e.g. as date or simpl
 For more advanced models it is possible to describe the subject and object in a anonymous way, without a concrete entity.
 These anonymous resources are called blank nodes, but will be without broader relevance for this thesis.
 At the end one important distinction has to be made about RDF.
-Often RDF is getting confused with RDF/XML -- a notation of RDF statements.
+Often RDF is getting confused with RDF/XML \cite{beckett2004rdf} -- a notation of RDF statements.
 While RDF itself only describes how to model information, several RDF notations exist that express these information in several ways.
-Examples for such notations besides the already mentioned RDF/XML is N-Triples, Turtle or JSON-LD.
+Examples for such notations besides the already mentioned RDF/XML is N-Triples, Turtle \cite{beckett2008turtle} or JSON-LD \cite{lanthaler2012using}.
 
 \begin{figure}
   \centering
@@ -107,17 +108,15 @@ Examples for such notations besides the already mentioned RDF/XML is N-Triples, 
 
 On top of RDF the Semantic Web Stack levels SPARQL, an RDF query language.
 SPARQL enables comprehensive queries over a knowledge base built on RDF.
-SPARQL itself uses many well known keywords from SQL, but because of the graph structure of RDF and therefore of the triple stores the languages naturally differ.
-
+SPARQL itself uses many well known keywords from SQL, but because of the graph structure of RDF and therefore of the triple stores the languages naturally differ.\\
 Given the following two triples in Turtle notation:
-\begin{lstlisting}[numbers=none,label=turtle]
+\begin{lstlisting}[numbers=none,caption=Example Turtle triples]
 @prefix ex: <http://example.com/>.
 ex:anna ex:name ``Anna''.
 ex:bob  ex:name ``Bob''. 
 \end{lstlisting}
-
 Then the following simple SPARQL query would return the result ``Bob''.
-\begin{lstlisting}[numbers=none,label=sparql]
+\begin{lstlisting}[numbers=none,caption=Example SPARQL query]
 SELECT ?name
 WHERE {
   ex:bob ex:name ?name.
@@ -132,12 +131,24 @@ This is a key feature for an easy integration of several RDF graphs.
 \label{sec:linked-open-data}
 As described in the previous section RDF statements spans a graph of triples.
 Thereby, each knowledge base spans their own graph.
-Examples for large knowledge bases are DBpedia\footnote{\url{http://dbpedia.org}}, LinkedGeoData\footnote{\url{http://linkedgeodata.org}} or Drugbank.
+Examples for large knowledge bases are DBpedia\footnote{\url{http://dbpedia.org} (last access Sept 18, 2013)}, LinkedGeoData\footnote{\url{http://linkedgeodata.org} (last access Sept 18, 2013)} or Drugbank.
 \textit{Linked Data} in general now describes the situation that entities of one knowledge base link to entities of another knowledge base.
 For example an entity of DBpedia about a drug could link to the same entity in Drugbank for further information.
-If the mentioned knowledge bases are freely available and usable then this is called \textit{Linked Open Data}.
+In this case both knowledge bases would describe the same entity.
+In other cases Linked Data is used to refer to different entities.
+In the example above this could mean that the drug entity of Drugbank is refering to an entity of a chemical knowledge base to describe the compund of the drug in more detail.
+Listing \ref{linkedturtle} shows an example given in Turtle notation where an RDF triple links from one knowledge base to another.
+This triple states that the DBpedia entity ``Metoprolol'' describes the same subject as the Drugbank entity ``Metoprolol''.
+\begin{lstlisting}[numbers=none,caption=Example triple for linking two entities of different knowledge bases,label=linkedturtle]
+@prefix drugbank: <http://drugbank.bio2rdf.org/>
+@prefix dbpedia: <http://dbpedia.org/resource/>
+@prefix owl: <http://www.w3.org/2002/07/owl#>
 
-Tim Berners-Lee proposed some rules that state whether a data source is Linked Open Data, or not.
+dbpedia:Metoprolol owl:sameAs drugbank:Metoprolol.
+\end{lstlisting}
+If the mentioned knowledge bases are freely available and usable then this is called \textit{Linked Open Data} (LOD).
+
+Tim Berners-Lee proposed some rules\footnote{\url{http://www.w3.org/DesignIssues/LinkedData.html} (last access Sept 18, 2013)} that state whether a data source is Linked Open Data, or not.
 These rules are:
 \begin{enumerate}
 \item Use URIs to denote things.
@@ -156,15 +167,18 @@ Therefore the more a knowledge base follows these principals the more stars it e
 \item \textbf{5 stars} - All the above, plus: Link your data to other people’s data to provide context
 \end{itemize}
 
-In conjunction with SPARQL this leads to large federated collections of knowledge that are comprehensively queryable.
-Figure \ref{fig:lod_cloud} gives an overview over the Linked Open Data cloud in 2011.
-But this kind of figure will end soon because of the rapidly evolving number of data sets.
 \begin{figure}
   \centering
-  \includegraphics[width=\textwidth]{preliminaries/lod-cloud}
-  \caption{Linking Open Data cloud diagram, by Richard Cyganiak and Anja Jentzsch. http://lod-cloud.net/}
+  \includegraphics[scale=0.7]{preliminaries/2010-12-04_lodd_cloud.png}%lod-cloud}
+  \caption{Biomedical data sets of the Linked Open Data cloud}% diagram, by Richard Cyganiak and Anja Jentzsch. http://lod-cloud.net/}
   \label{fig:lod_cloud}
 \end{figure}
+
+
+In conjunction with SPARQL this leads to large federated collections of knowledge that are comprehensively queryable.
+Figure \ref{fig:lod_cloud} gives an overview over the biomedical domain of the Linked Open Data cloud in 2010.
+But this is only a small section of the complete Linked Open Data cloud and produces such graphs for the complete cloud is going to be unreadable in the last years.
+%But this kind of figure will end soon because of the rapidly evolving number of data sets.
 
 %%% Local Variables: 
 %%% mode: latex
