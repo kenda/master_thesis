@@ -24,9 +24,9 @@ Dispedia is based on several ontologies and uses Linked Open Data e.g. for addit
 The following paragraph will describe some of the core concepts of Dispedia which are essential for the integration of SEDRI.
 
 Maybe the most important core concept are \textit{Proposals}.
-A proposal is a possibility of a physician to offer several therapeutical activities to a patient.
+A proposal is a possibility of a physician to offer several therapeutic activities to a patient.
 In the Dispedia model a proposal represents a frame for multiple proposal components.
-A proposal component in turn contains the mentioned therapeutical activities like prescribing drugs, medical devices or other services.
+A proposal component in turn contains the mentioned therapeutic activities like prescribing drugs, medical devices or other services.
 Proposal components act like bricks which can be assigned to different proposals.
 This is a flexible way to create treatment offers.
 Proposals are assigned to patients.
@@ -52,7 +52,7 @@ Each proposal component can contain multiple drugs.
 If such a proposal component is created or modified then the containing drugs are tested for possible interactions.
 In this case Dispedia has nothing to do than calling SEDRI with the appropriate drug codes that are stored in the system and to process the results.
 \item \textit{Check B}: The second integration is implemented in the logic of proposals.
-As the introduction about Dispedia described each proposal can contain multiple proposal components which thereself contains drugs.
+As the introduction about Dispedia described each proposal can contain multiple proposal components which theirselves contains drugs.
 In this scenario it is possible that a physician proposes a specific proposal including multiple components where each component itself contains no interactions but the components among each other contains interactions.
 To prevent such a scenario the components of a proposal are tested for interactions on creation and modification of the proposal.
 \item \textit{Check C}: The third integration of the drug-drug interaction endpoint is implemented in the patient proposal allocation.
@@ -69,16 +69,16 @@ In this case an additional call of SEDRI is not necessary.
 
 \begin{figure}
   \centering
-  \includegraphics[scale=0.49]{evaluation/Dispedia_Integration_activity}
+  \includegraphics[scale=0.49]{evaluation/Dispedia_Integration_activity.pdf}
   \caption{Activity diagram of Dispedia proposal workflow}
   \label{fig:dispedia_activity}
 \end{figure}
-Figure \ref{fig:dispedia_activity} gives a graphical overview of the typical proposal workflow in Dispedia and where SEDRI is used.\todo{grafik}\\
+Figure \ref{fig:dispedia_activity} gives a graphical overview of the typical proposal workflow in Dispedia and where SEDRI is used.\\
 The workflow is divided in the physician's activity and the patient's activity.
 The beginning of the workflow is the creation of a new proposal by a physician.
 If there are already existing proposal components then several of these components can be added to the new proposal.
 Otherwise or additionally it is possible to create new proposal components.
-These proposal components may contain drugs or other therapeutical activities as described in the previous introduction section.
+These proposal components may contain drugs or other therapeutic activities as described in the previous introduction section.
 If a new proposal component was created the included drugs will be tested for drug-drug interactions by SEDRI (\textit{Check A}).
 After all desired proposal components are added to the proposal and the proposal is saved, the second call of SEDRI (\textit{Check B}) is executed.
 Now the new proposal can be allocated to several patients.
@@ -217,7 +217,6 @@ This means all the funtionality described in Section \ref{sec:features} except t
 An example that SEDRI is usable for frontend information as well as backend processing is the Side effect detector.
 This feature uses the side effects endpoint of SEDRI in the backend for the internal comparison of the given side effects and all the possible side effects of the current medication.
 On the other hand it uses the same endpoint in the frontend by displaying all available side effects in the detail page of a drug.
-
 If desired the application could request different return formats for the different use cases.
 But in the case of the Side effect detector JSON-LD is used for both processes and the evaluation showed that this suits well.
 %%% Local Variables: 

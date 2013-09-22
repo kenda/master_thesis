@@ -23,7 +23,7 @@ The local integration approach only queries a local target and therefore it is m
 The downside of this approach is that the data has to be updated regularly or the integration component will provide outdated data very quickly.
 
 Example engines for the virtual integration of semantic knowledge bases are SPARQL~1.1 federated queries or tools like FedX \cite{schwarte2011fedx} that support also SPARQL < 1.1.
-With SPARQL 1.1 it is possible to query multiple tagets with one statement by using the \texttt{SERVICE} keyword.
+With SPARQL 1.1 it is possible to query multiple targets with one statement by using the \texttt{SERVICE} keyword.
 Listing \ref{lst-fed} gives an example of a federated query over two knowledge bases.
 
 \lstset{language=sparql}
@@ -46,7 +46,7 @@ The only problem is that the specific endpoints have to support SPARQL 1.1 which
 An example of a local integration is the Linked Life Data project.\footnote{Linked Life Data: \url{http://linkedlifedata.com} (last access Sep 04, 2013)}
 This project integrates multiple knowledge bases like Drugbank or Diseasome.
 A disadvantage of the project is the license model\footnote{Linked Life Data -- license model: \url{http://linkedlifedata.com/about} (last access Sep 04, 2013)} which states that free access is limited to only one query per 30 seconds and only annual updated data sets.
-Otherwise the commercial enterprise license is required which then would allow umlimited query execution and monthly updated data sets.
+Otherwise the commercial enterprise license is required which then would allow unlimited query execution and monthly updated data sets.
 
 Which approach the SEDRI project uses will be explained in the following section.
 
@@ -65,17 +65,17 @@ Section \ref{sec:data-integration} described the different possible approaches f
 SEDRI currently uses a virtual integration approach.
 The reasons for this decision is the simplicity, the low costs of the approach and the fact that possible applications expect always up-to-date knowledge.
 Especially in the biomedical domain this is an important requirement.
-SEDRI does not use the SPARQL 1.1 federated query possibility because many of the used data sets, or more specific the respectiv SPARQL endpoints, doesn't support this feature yet.
+SEDRI does not use the SPARQL 1.1 federated query possibility because many of the used data sets, or more specific the respective SPARQL endpoints, doesn't support this feature yet.
 Therefore the different SPARQL endpoints are queried and the results merged.
 The results are queried by a SPARQL \texttt{CONSTRUCT} or \texttt{DESCRIBE} statement.
 This means that always full RDF resources are returned and not only single entities or literals that are returned by a \texttt{SELECT} query.
-These RDF resources can be returned by SEDRI in several representation formats, like \textit{Turtle}, \textit{RDF/XML} or \textit{JSON-LD}.
+These RDF resources can be returned by SEDRI in several representation formats, like Turtle, RDF/XML or JSON-LD.
 By default JSON-LD will be returned, because JSON in general is the dominating data exchange format of modern web API's.
 Other formats can be requested by setting the HTTP \texttt{Accept} Header to the appropriate MIME type.
 
 To abstract from the required background knowledge about the data sources, SEDRI predefines some API endpoints that are easily usable by only providing the necessary drug codes.
 As such drug codes currently the Anatomical Therapeutic Chemical Classification System (ATC) code or the Drugbank ID are supported.
-These IDs are required to identify a drug unambigiously.
+These IDs are required to identify a drug unambiguously.
 The API endpoints are designed to cover each phase of the WHO drug management life cycle.
 The following paragraphs describe all available API endpoints that are provided by SEDRI and the respective SPARQL queries and show an example request for each endpoint.
 
@@ -114,8 +114,8 @@ PREFIX rdfs:    <http://www.w3.org/2000/01/rdf-schema#>
 CONSTRUCT {
   ?s a dbv:Drug-Drug-Interaction.
   ?s rdfs:label ?desc.
-  ?drug1 dbv:ddi-interactor-in ?s.
-  ?drug2 dbv:ddi-interactor-in ?s.
+  ?drug1 dbv:ddi-interactor-in ?s .
+  ?drug2 dbv:ddi-interactor-in ?s .
 }
 WHERE {
   ?s rdfs:label ?desc.
@@ -123,16 +123,16 @@ WHERE {
     ?drug1 owl:sameAs db:DB01050 .
     ?drug2 owl:sameAs db:DB00264 .
     {
-      ?s dikbD2R:ObjectDrugOfInteraction ?drug1.
-      ?s dikbD2R:PrecipitantDrugOfInteraction ?drug2.
+      ?s dikbD2R:ObjectDrugOfInteraction ?drug1 .
+      ?s dikbD2R:PrecipitantDrugOfInteraction ?drug2 .
     } UNION {
-      ?s dikbD2R:ObjectDrugOfInteraction ?drug2.
-      ?s dikbD2R:PrecipitantDrugOfInteraction ?drug1.
+      ?s dikbD2R:ObjectDrugOfInteraction ?drug2 .
+      ?s dikbD2R:PrecipitantDrugOfInteraction ?drug1 .
     }
   }
 }
 \end{lstlisting}
-Listing \ref{lst:ddi} shows an examplary HTTP request url for the drug-drug interaction endpoint.
+Listing \ref{lst:ddi} shows an exemplary HTTP request url for the drug-drug interaction endpoint.
 \begin{lstlisting}[label=lst:ddi,caption=Example request for the drug-drug interaction endpoint]
   GET http://sedri.de/ddi/?drug1=C07AB02&drug2=C07AB07&drug3=C01EB16
 \end{lstlisting}
@@ -142,7 +142,7 @@ The side effects endpoint expects one drug code and returns all available side e
 This component supports primarily the phase \textit{Use} where it could support the treating parties for example if the respective patient shows signs of an adverse effect.
 But this component is also applicable for the \textit{Selection}.
 In this case drugs with a specific side effect could be excluded.\\
-The following code listings show two example queries that retrieve the side effects of Ibuprofen from SIDER and PhramGKB.
+The following code listings show two example queries that retrieve the side effects of Ibuprofen from SIDER and PharmGKB.
 \begin{lstlisting}[caption=Example SIDER query for side effects of Ibuprofen]
 PREFIX owl: <http://www.w3.org/2002/07/owl#>
 PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
@@ -154,7 +154,7 @@ CONSTRUCT {
   ?se a ?type.
 }
 WHERE {
-  ?drug owl:sameAs db:DB01050 .
+  ?drug owl:sameAs db:DB01050.
   ?drug sider:sideEffect ?se.
   ?se rdfs:label ?label.
   ?se a ?type.
@@ -180,14 +180,14 @@ WHERE {
   ?event rdfs:label ?label.
 }
 \end{lstlisting}
-Listing \ref{lst:sides} shows an examplary HTTP request url for the side effects endpoint.
+Listing \ref{lst:sides} shows an exemplary HTTP request url for the side effects endpoint.
 \begin{lstlisting}[label=lst:sides,caption=Example request for the side effects endpoint]
   GET http://sedri.de/sideeffects/?drug=C07AB02
 \end{lstlisting}
 
 \subsection*{Procurement}
 The procurement component returns the possible manufacturers and packagers for a given drug code.
-Trivialy this component supports the \textit{Procurement} phase of the drug management life cycle.
+Trivially this component supports the \textit{Procurement} phase of the drug management life cycle.
 
 \begin{lstlisting}[caption=Example Drugbank query for procurement meta data of Ibuprofen]
 PREFIX dbv: <http://bio2rdf.org/drugbank_vocabulary:>
@@ -204,7 +204,7 @@ WHERE {
   db:DB01050 dbv:manufacturer ?manufacturer.
 }
 \end{lstlisting}
-Listing \ref{lst:proc} shows an examplary HTTP request url for the procurement endpoint.
+Listing \ref{lst:proc} shows an exemplary HTTP request url for the procurement endpoint.
 \begin{lstlisting}[label=lst:proc,caption=Example request for the procurement endpoint]
   GET http://sedri.de/procure/?drug=C07AB02
 \end{lstlisting}
@@ -214,8 +214,8 @@ This endpoint proposes several drugs to a given disease.
 To specify the disease currently only the Medical Subject Headings (MeSH) ID is supported.
 As results the respective URIs to the drugs are returned.
 With these URIs more details can be retrieved or other endpoints of SEDRI may be used.
-This component covers the \textit{Selection} phase where it could support the physician by chosing an appropriate drug to a given disease.
-Important is the fact that these are only recommendations to relieve the physiscian -- the final decisision has to be made by the expert.
+This component covers the \textit{Selection} phase where it could support the physician by choosing an appropriate drug to a given disease.
+Important is the fact that these are only recommendations to relieve the physician -- the final decision has to be made by the expert.
 
 In example \ref{lst:diseasome} \texttt{diseasome:561} is the appropriate Diseasome URI of ``Hypertension'' which was converted from the MeSH ID (D006973) by DBpedia in a previous request.
 
@@ -229,14 +229,14 @@ WHERE {
   diseasome:561 diseasome-instance:possibleDrug ?o.
 }
 \end{lstlisting}
-Listing \ref{lst:prop} shows an examplary HTTP request url for the drug proposal endpoint.
+Listing \ref{lst:prop} shows an exemplary HTTP request url for the drug proposal endpoint.
 \begin{lstlisting}[label=lst:prop,caption=Example request for the drug proposal endpoint]
   GET http://sedri.de/proposal/?code=D006973
 \end{lstlisting}
 
 \subsection*{Pharmacokinetic meta data}
 This component returns several meta data for a given drug code.
-The results contains mainly pharmacokinetic information like dosages, the affected organism or the route of elimination.
+The results contain mainly pharmacokinetic information like dosages, the affected organism or the route of elimination.
 In the WHO drug management life cycle this component covers mainly the \textit{Use} phase but also in parts the \textit{Selection} phase.
 
 \begin{lstlisting}[caption=Example Diseasome query for possible drugs of Hypertension,label=lst:diseasome]
@@ -268,7 +268,7 @@ WHERE {
 }
 \end{lstlisting}
 %The appropriate SPARQL query omitted due to its extent and simplicity.
-Listing \ref{lst:meta} shows an examplary HTTP request url for the meta data endpoint.
+Listing \ref{lst:meta} shows an exemplary HTTP request url for the meta data endpoint.
 \begin{lstlisting}[label=lst:meta,caption=Example request for the meta data endpoint]
   GET http://sedri.de/details/?drug=C07AB02
 \end{lstlisting}
@@ -294,7 +294,7 @@ The table also contains a short description of the data set and how it is used b
 \begin{longtable}{p{\textwidth/4}|p{\textwidth/3}|p{\textwidth/3}}
   Data set & Description & Usage\\
   \hline
-  DBpedia & DBpedia retrieves meta data form Wikipedia pages that are often shown in info boxes. DBpedia therefore provides many cross domain information and takes a central role in the Linked Open Data cloud. In 2011 DBpedia contained descriptions about more than 3.64 million things including 5,400 diseases. & The data set is used for converting the given ATC codes of drugs to Drugbank IDs for a better processing. The second use case is the proposal endpoint where DBpedia is used for the assignment of the Diseasome URI to a given MeSH code.\\
+  DBpedia & DBpedia retrieves meta data from Wikipedia pages that are often shown in info boxes. DBpedia therefore provides many cross domain information and takes a central role in the Linked Open Data cloud. In 2011 DBpedia contained descriptions about more than 3.64 million things including 5400 diseases. & The data set is used for converting the given ATC codes of drugs to Drugbank IDs for a better processing. The second use case is the proposal endpoint where DBpedia is used for the assignment of the Diseasome URI to a given MeSH code.\\
   Drugbank & Drugbank is a large knowledge base that contains many different information about drugs and their meta data such as interactions, dosages or manufacturers. It has a comparable central role like DBpedia but in the biomedical part of the Linked Open Data cloud. & Drugbank is the main knowledge base used by SEDRI. It provides information for nearly each given endpoint, except the side effects.\\
   SIDER & The main domain of SIDER are adverse drug reactions. ``The information is extracted from public documents and package inserts''\footnote{\url{http://sideeffects.embl.de/} (last access Sept 19, 2013)} and includes ``side effect frequency, drug and side effect classifications as well as links to further information, for example drug–target relations''. & SIDER is only used by the side effects endpoint.\\
   Drug Interaction Knowledge Base (DIKB) & The DIKB is an evidence-focused knowledge base that provides information about drug drug interactions. ``The DIKB contains quantitative and qualitative assertions about drug mechanisms and pharmacokinetic drug-drug interactions''\footnote{\url{http://dbmi-icode-01.dbmi.pitt.edu/dikb-evidence/front-page.html} (last access Sept 09, 2013)} & DIKB is used as additional source for the interactions endpoint.\\

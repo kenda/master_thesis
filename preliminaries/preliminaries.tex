@@ -4,7 +4,7 @@
 \section{Drug Management}
 \label{sec:drug-management}
 
-To get a better understanding what the term Drug Management stands for it is essential to clearify the term Management at first.
+To get a better understanding what the term Drug Management stands for it is essential to clarify the term Management at first.
 In general management comprises the non-executing tasks of a certain domain to accomplish certain goals.
 These non-executing tasks are divided in the four stages: \textit{planning}, \textit{organizing}, \textit{leading} and \textit{controlling} \cite{robbins2007fundamentals}.
 The term Drug Management was adopted by the WHO in their publication about managing drugs at health centres \cite{who2004}.
@@ -13,7 +13,7 @@ The term management is defined in their publication as follows:
   Management is the act or art of being responsible or in charge and conducting or supervising something (e.g. a health centre pharmacy, business, public undertaking) with a degree of skill and address. It is the judicious use of means to accomplish an end (i.e. public health).
 \end{quote}
 With this definition in mind the question can be answered why it is useful to manage drugs.
-Refering to the WHO there are three main reasons:
+Referring to the WHO there are three main reasons:
 \begin{enumerate}
 \item ``Firstly, drugs are part of the link between the patient and health services.''\\
   This is the most trivial reason that addresses the direct influence of drugs to the patients health state. If drugs are not managed properly the success of the treatment process is imperiled. 
@@ -37,7 +37,7 @@ This life cycle which is shown in figure \ref{fig:life_cycle} contains four phas
   If all possible circumstances are considered properly, this phase can be the most comprehensive of the cycle.
 \item Procurement\\
   After the right drugs where chosen in the selection phase the next step is to procure these drugs.
-  In this phase drug management can help to chose the best, e.g. cheapest vendors.
+  In this phase drug management can help to choose the best, e.g. cheapest vendors.
   Otherwise it may be the case that more expensive vendors are chosen just because of the large sector of drug companies.
 \item Use\\
   Many adverse drug events occur because of incorrect delivered drugs.
@@ -61,7 +61,7 @@ Fields of research like \textit{Big Data} also show the importance of managing t
 One key issue since years is the distinction between syntactically and semantically processable data.
 Tim Berners-Lee proposed in 2001 a concept to describe specific data statements in a better way \cite{berners2001semantic}.
 This model behind this approach was called \textit{Ressource Description Framework} (RDF) \cite{klyne2004resource} and is one important part of the Semantic Web Stack.
-This stack combines several technologies and standars that are necessary to transfer the syntactic web to a semantic web.
+This stack combines several technologies and standards that are necessary to transfer the syntactic web to a semantic web.
 The Semantic Web Stack is illustrated in figure \ref{fig:sem_stack}.
 \begin{figure}
   \centering
@@ -73,11 +73,11 @@ The advantages of a semantic web are numerous.
 The main advantage is that the information are not only machine readable but machine processable.
 This entails other improvements like reasoning that transfers implicit knowledge into explicit.
 
-The following paragraphs will describe the most important technologies and standards of the Semantic Web Stack that are necessary for this thesis:
+The following paragraphs will describe the most important technologies and standards of the Semantic Web Stack that are necessary for this thesis
 
 At the lowest level of the stack there is the concept of the Uniform Resource Identifier (URI).
 A URI identifies a specific resource, e.g. a car.
-For several other domains there already exists such concepts as URIs.
+For several other domains there already exist such concepts as URIs.
 For example the Uniform Resource Locator (URL) identifies web sites or an International Standard Book Number (ISBN) identifies books.
 The URI itself is just a set of characters that can be additionally divided into five segments: scheme, authority, path, query and fragment.
 An example of such a URI would be: \texttt{http://example.com/Alice}.
@@ -87,12 +87,12 @@ Based on the identification of resources, the already mentioned Resource Descrip
 Therefore RDF is one of the most important concepts of the Semantic Web Stack.
 The approach of RDF to model knowledge is to express statements as triples.
 This is tight to how natural language is mostly constructed.
-Obviously that is why the components of the triple use the well known names of \textit{Subject, Predicate} and \textit{Object}.
+Obviously this is why the components of the triple use the well known names of \textit{Subject, Predicate} and \textit{Object}.
 Figure \ref{fig:sem_rdf} shows an example triple.
 The subject of such a triple has to be always an URI, same belongs to the predicate.
 An exception is the object which can be additionally a literal.
 A literal is a direct information typed in a specific way, e.g. as date or simply text, which refers to no other resource.
-For more advanced models it is possible to describe the subject and object in a anonymous way, without a concrete entity.
+For more advanced models it is possible to describe the subject and object in an anonymous way, without a concrete entity.
 These anonymous resources are called blank nodes, but will be without broader relevance for this thesis.
 At the end one important distinction has to be made about RDF.
 Often RDF is getting confused with RDF/XML \cite{beckett2004rdf} -- a notation of RDF statements.
@@ -119,7 +119,7 @@ Then the following simple SPARQL query would return the result ``Bob''.
 \begin{lstlisting}[numbers=none,caption=Example SPARQL query]
 SELECT ?name
 WHERE {
-  ex:bob ex:name ?name.
+  <http://example.com/bob> <http://example.com/name> ?name.
 }
 \end{lstlisting}
 
@@ -136,7 +136,7 @@ Examples for large knowledge bases are DBpedia\footnote{\url{http://dbpedia.org}
 For example an entity of DBpedia about a drug could link to the same entity in Drugbank for further information.
 In this case both knowledge bases would describe the same entity.
 In other cases Linked Data is used to refer to different entities.
-In the example above this could mean that the drug entity of Drugbank is refering to an entity of a chemical knowledge base to describe the compund of the drug in more detail.
+In the example above this could mean that the drug entity of Drugbank is referring to an entity of a chemical knowledge base to describe the compound of the drug in more detail.
 Listing \ref{linkedturtle} shows an example given in Turtle notation where an RDF triple links from one knowledge base to another.
 This triple states that the DBpedia entity ``Metoprolol'' describes the same subject as the Drugbank entity ``Metoprolol''.
 \begin{lstlisting}[numbers=none,caption=Example triple for linking two entities of different knowledge bases,label=linkedturtle]
@@ -160,7 +160,7 @@ These rules are:
 Further, Berners-Lee categorizes Linked Open Data on the basis of a five star rating.
 Therefore the more a knowledge base follows these principals the more stars it earns.
 \begin{itemize}
-\item \textbf{1 star} - Available on the web (whatever format) but with an open licence, to be Open Data
+\item \textbf{1 star} - Available on the web (whatever format) but with an open license, to be Open Data
 \item \textbf{2 stars} - Available as machine-readable structured data (e.g. excel instead of image scan of a table)
 \item \textbf{3 stars} - as (2) plus non-proprietary format (e.g. CSV instead of excel)
 \item \textbf{4 stars} - All the above plus, Use open standards from W3C (RDF and SPARQL) to identify things, so that people can point at your stuff
@@ -177,7 +177,7 @@ Therefore the more a knowledge base follows these principals the more stars it e
 
 In conjunction with SPARQL this leads to large federated collections of knowledge that are comprehensively queryable.
 Figure \ref{fig:lod_cloud} gives an overview over the biomedical domain of the Linked Open Data cloud in 2010.
-But this is only a small section of the complete Linked Open Data cloud and produces such graphs for the complete cloud is going to be unreadable in the last years.
+But this is only a small section of the complete Linked Open Data cloud and producing such graphs for the complete cloud has been going to be unreadable in the last years.
 %But this kind of figure will end soon because of the rapidly evolving number of data sets.
 
 %%% Local Variables: 
