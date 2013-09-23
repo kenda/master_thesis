@@ -22,7 +22,7 @@ Additionally it is not uncommon that knowledge bases are not available for a giv
 The local integration approach only queries a local target and therefore it is more performant in most of the cases.
 The downside of this approach is that the data has to be updated regularly or the integration component will provide outdated data very quickly.
 
-Example engines for the virtual integration of semantic knowledge bases are SPARQL~1.1 federated queries or tools like FedX \cite{schwarte2011fedx} that support also SPARQL < 1.1.
+Example engines for the virtual integration of semantic knowledge bases are federated queries of SPARQL~1.1 or tools like FedX \cite{schwarte2011fedx} that support also SPARQL < 1.1.
 With SPARQL 1.1 it is possible to query multiple targets with one statement by using the \texttt{SERVICE} keyword.
 Listing \ref{lst-fed} gives an example of a federated query over two knowledge bases.
 
@@ -43,9 +43,9 @@ WHERE
 These federated queries are an easy yet powerful way to perform queries over multiple knowledge bases without the use of external tools.
 The only problem is that the specific endpoints have to support SPARQL 1.1 which is currently not given in all cases.
 
-An example of a local integration is the Linked Life Data project.\footnote{Linked Life Data: \url{http://linkedlifedata.com} (last access Sep 04, 2013)}
+An example of a local integration is the Linked Life Data project.\footnote{Linked Life Data: \url{http://linkedlifedata.com} (last access Sept 04, 2013)}
 This project integrates multiple knowledge bases like Drugbank or Diseasome.
-A disadvantage of the project is the license model\footnote{Linked Life Data -- license model: \url{http://linkedlifedata.com/about} (last access Sep 04, 2013)} which states that free access is limited to only one query per 30 seconds and only annual updated data sets.
+A disadvantage of the project is the license model\footnote{Linked Life Data -- license model: \url{http://linkedlifedata.com/about} (last access Sept 04, 2013)} which states that free access is limited to only one query per 30 seconds and only annual updated data sets.
 Otherwise the commercial enterprise license is required which then would allow unlimited query execution and monthly updated data sets.
 
 Which approach the SEDRI project uses will be explained in the following section.
